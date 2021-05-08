@@ -1,6 +1,7 @@
 --Programm for digging out a room
 
---Starting with variables for the dimensions
+--Starting with variables for the dimensions, an ender chest and the Starting
+--direction
 local length
 local width
 local height
@@ -9,7 +10,8 @@ local eChest
 local valNum = "Please enter a valid number"
 
 local widthCount
-local direction = true
+local direction
+local directionRead
 
 local fuelLevel
 
@@ -80,6 +82,8 @@ local function fuelUsage(h, l, w)
 end
 
 
+
+
 --Main move  function
 local function moveForward()
 
@@ -120,12 +124,22 @@ end
 --Function for the programm itself
 local function main()
   cls()
-  write("Welcome to the room creator (digging to the left)")
+  write("Welcome to the room creator")
   term.setCursorPos(1,2)
   write("Make sure to have enough fuel!")
   term.setCursorPos(1,3)
   write("Put a Chests in the first slot!")
   term.setCursorPos(1,4)
+  write("Where are you starting:(r/l): ")
+  directionRead = read()
+  if directionRead == "r" then
+    direction = true
+  elseif directionRead == "l" then
+    direction = false
+  else
+    write("Please enter a valid value")
+    restart()
+  end
   write("Wich length should the room have: ")
   length = read()
   if tonumber(length) == nil then

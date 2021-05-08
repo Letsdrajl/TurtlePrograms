@@ -140,6 +140,7 @@ local function main()
     write("Please enter a valid value")
     restart()
   end
+  term.setCursorPos(1,5)
   write("Wich length should the room have: ")
   length = read()
   if tonumber(length) == nil then
@@ -148,7 +149,7 @@ local function main()
     sleep(5)
     restart()
   end
-  term.setCursorPos(1,5)
+  term.setCursorPos(1,6)
   write("Wich width should the room have: ")
   width = read()
   if tonumber(width) == nil then
@@ -157,7 +158,7 @@ local function main()
     sleep(5)
     restart()
   end
-  term.setCursorPos(1,6)
+  term.setCursorPos(1,7)
   write("Wich height should the room have: ")
   height = read()
   if tonumber(height) == nil then
@@ -166,7 +167,7 @@ local function main()
     sleep(5)
     restart()
   end
-  term.setCursorPos(1,7)
+  term.setCursorPos(1,8)
   write("Do you use an ender chest?(y): ")
   eChest = read()
   cls()

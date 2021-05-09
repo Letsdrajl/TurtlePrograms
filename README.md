@@ -1,4 +1,4 @@
-# TurtleProgramms
+# TurtlePrograms
 Here is the collection of my turtle programms/computer programs for computercraft or OpenComputers.
 Each programm name has a pastebin code and a small description.
 

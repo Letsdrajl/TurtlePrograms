@@ -108,7 +108,7 @@ reactorControl = {
 
 turbinePage = {
     width = 13,
-    x = 9,
+    x = 19,
     y = ymid,
     height = 3,
     monitor = mon,

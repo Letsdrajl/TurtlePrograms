@@ -5,7 +5,7 @@ urls = {
     {"Button",  "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/Button.lua"},
     {"Main",    "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/ReactorTurbine/Main.lua"},
     {"EventListener",  "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/EventListener.lua"},
-    {"ReactorControl", ""}
+    {"ReactorControl", "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/ReactorTurbine/Reactor.lua"}
 }
 
 

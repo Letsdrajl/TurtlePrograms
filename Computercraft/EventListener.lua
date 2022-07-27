@@ -74,4 +74,5 @@ function updateLoop(updateFequency, stop, fun)
     
     
   end
+  print("Loop ended")
 end

@@ -3,7 +3,9 @@
 
 urls = {
     {"Button",  "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/Button.lua"},
-    {"Main",  "https://raw.githubusercontent.com/Letsdrajl/Turtleprograms/main/Main.lua"}
+    {"Main",    "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/ReactorTurbine/Main.lua"},
+    {"EventListener",  "https://raw.githubusercontent.com/Jiggins/ComputerCraft/master/EventListener.lua"},
+    {"ReactorControl", ""}
 }
 
 
@@ -28,9 +30,6 @@ function download(name, url)
     print("Successfully downloaded " .. name .. "\n")
 end
   
-  for key, value in ipairs(urls) do
-      download(unpack(value))
-  end
-  
-  term.clear()
-  term.setCursorPos()
+for key, value in ipairs(urls) do
+    download(unpack(value))
+end

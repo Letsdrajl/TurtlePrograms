@@ -2,10 +2,10 @@
 
 
 urls = {
-    {"Button",  "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/Button.lua"},
-    {"Main",    "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/ReactorTurbine/Main.lua"},
-    {"EventListener",  "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/EventListener.lua"},
-    {"ReactorControl", "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/ReactorTurbine/Reactor.lua"}
+    {"Button",          "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/Button.lua"},
+    {"Main",            "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/ReactorTurbine/Main.lua"},
+    {"EventListener",   "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/EventListener.lua"},
+    {"ReactorControl",  "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/ReactorTurbine/Reactor.lua"}
 }
 
 

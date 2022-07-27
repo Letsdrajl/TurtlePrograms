@@ -141,11 +141,9 @@ function main()
     drawStaticText()
 
     print("Adding Buttons")
-    Button:new(reactorControl)
-    Button:new(aePower)
-    Button:new(aeCrafting)
-    Button:new(quit)
-    Button:new(reboot)
+    Button.new(reactorControl)
+    Button.new(quit)
+    Button.new(reboot)
     Button.drawAll()
 
 print("Adding EventListeners")
@@ -162,17 +160,6 @@ EventListener.add("timer", "Automatic Shut Down", function()
     if not reactor then
         reactor = peripheral.wrap(reactorString)
         end 
-    end
-)
-
-EventListener.add("timer", "Automatic Shut Down", function()
-    if reactor then
-        if reactor.getEnergyStored() > 7500000 then
-        reactor.setActive(false)
-        reactorControl.state = false
-        Button.drawAll()
-        end
-    end
     end
 )
 

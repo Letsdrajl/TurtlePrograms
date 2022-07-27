@@ -31,7 +31,7 @@ mt.__index = function (table, key)
   return prototype[key]
 end
 
-function Button:new(o)
+function new(o)
   o = o or {}
   setmetatable(o, Button.mt)
   buttons[#buttons+1] = o

@@ -108,7 +108,7 @@ reactorControl = {
 
 turbinePage = {
     width = 13,
-    x = 8,
+    x = 9,
     y = ymid,
     height = 3,
     monitor = mon,
@@ -118,7 +118,7 @@ turbinePage = {
     colourOn = colours.green,
     colourOff = colours.red,
     onClick = function(s)
-        stop = false
+        stop = true
     end
 }
 

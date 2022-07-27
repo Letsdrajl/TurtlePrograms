@@ -8,6 +8,11 @@ local reactorString = "BigReactors-Reactor_0"
 
 local reactor = peripheral.wrap(reactorString)
 
+if not reactor then
+    print("No Reactor connected")
+    shell.exit()
+end
+
 local mon = peripheral.find("monitor",
     function (name, object)
         return object.isColour()                
@@ -48,43 +53,40 @@ local function drawText()
     end
 
     mon.setCursorPos(12, 1)
-    if reactor.getConnected() then
+
+    mon.setTextColour(colours.green)
+    mon.write("Connected")
+    mon.setCursorPos(12, 2)
+    
+    if reactor.getActive() then
         mon.setTextColour(colours.green)
-        mon.write("Connected")
-        mon.setCursorPos(12, 2)
-        
-        if reactor.getActive() then
-          mon.setTextColour(colours.green)
-          mon.write("Online")
-        else
-          mon.setTextColour(colours.red)
-          mon.write("Offline")
-        end
-    
-        mon.setTextColour(colours.white)
-        mon.setCursorPos(12, 3)
-        mon.write(reactor.getFuelAmount() / 1000 .. "B")
-        mon.setCursorPos(12, 4)
-        mon.write(reactor.getFuelTemperature() .. " C")
-    
-        mon.setCursorPos(rightAlign + 12, 1)
-        mon.write(os.time())
-        mon.setCursorPos(rightAlign + 12, 2)
-        mon.write(reactor.getWasteAmount() / 1000 .. "B")
-        mon.setCursorPos(rightAlign + 12, 3)
-        mon.write(reactor.getCasingTemperature() .. " C")
-    
-        mon.setCursorPos(24, 4)
-        mon.setTextColour(colours.white)
-      else
+        mon.write("Online")
+    else
         mon.setTextColour(colours.red)
-        mon.write("Disconected")
-      end
+        mon.write("Offline")
+    end
+
+    mon.setTextColour(colours.white)
+    mon.setCursorPos(12, 3)
+    mon.write(reactor.getFuelAmount() / 1000 .. "B")
+    mon.setCursorPos(12, 4)
+    mon.write(reactor.getFuelTemperature() .. " C")
+
+    mon.setCursorPos(rightAlign + 12, 1)
+    mon.write(os.time())
+    mon.setCursorPos(rightAlign + 12, 2)
+    mon.write(reactor.getWasteAmount() / 1000 .. "B")
+    mon.setCursorPos(rightAlign + 12, 3)
+    mon.write(reactor.getCasingTemperature() .. " C")
+
+    mon.setCursorPos(24, 4)
+    mon.setTextColour(colours.white)
+      
 end
 
 local xmid, ymid = mon.getSize()
 xmid = xmid / 2
-ymid = ymid / 2 - 2
+ymid = (ymid / 2) - 2
 
 -- Buttons
 

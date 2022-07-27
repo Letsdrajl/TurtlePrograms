@@ -33,7 +33,7 @@ end
 
 function new(o)
   o = o or {}
-  setmetatable(o, Button.mt)
+  setmetatable(o, mt)
   buttons[#buttons+1] = o
   return o
 end
@@ -51,7 +51,8 @@ function draw(button)
   else
     term.setBackgroundColor(button.colourOff)
   end
-  term.setCursorPos(button.x, button.y)
+  --term.setCursorPos(button.x, button.y)
+  
 
   x1, y1, x2, y2 = getBounds(button)
   for j = y1, y2 do

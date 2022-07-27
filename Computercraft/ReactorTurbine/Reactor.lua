@@ -29,11 +29,11 @@ local rightAlign, _ = mon.getSize()
 rightAlign = rightAlign - 22
 
 local function drawStaticText()
-    mon.setCursorPos(1,1)
-    mon.write("Status:")
     mon.setCursorPos(1,2)
-    mon.write("Fuel:")
+    mon.write("Status:")
     mon.setCursorPos(1,3)
+    mon.write("Fuel:")
+    mon.setCursorPos(1,4)
     mon.write("Fuel Temp:")
 
     mon.setCursorPos(rightAlign,1)
@@ -157,10 +157,10 @@ function main()
             end 
         end
     )
-
+    
     EventListener.updateLoop(1, stop, function()
-        drawText()
-        end
+            drawText()
+       end
     )
 end
 

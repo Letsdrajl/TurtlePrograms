@@ -74,14 +74,14 @@ end
 function click(button)
   if not button.toggle then
     button.state = false
-    Button.draw(button)
+    draw(button)
     button.onClick()
     button.state = true
-    Button.draw(button)
+    draw(button)
   else
     button.state = not button.state
     button.onClick(button.state)
-    Button.draw(button)
+    draw(button)
   end
 end
 

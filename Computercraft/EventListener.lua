@@ -13,6 +13,7 @@ function init()
     paste = {},
     timer = {},
     alarm = {},
+    key_up = {},
     redstone = {},
     terminate = {},
     disk_eject = {},
@@ -60,9 +61,9 @@ end
 -- This will only call events on the redstone table if a redstone event is 
 -- captured.
 function runEvent(event)
-  for _, functionTable in pairs(events[event[1]]) do
-    functionTable["func"](event)
-  end
+    for _, functionTable in pairs(events[event[1]]) do
+      functionTable["func"](event)
+    end
 end
 
 function updateLoop(updateFequency, stop, fun)
@@ -70,5 +71,7 @@ function updateLoop(updateFequency, stop, fun)
     fun()
     os.startTimer(updateFequency)
     runEvent({os.pullEvent()})
+    
+    
   end
 end

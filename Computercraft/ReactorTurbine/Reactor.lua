@@ -106,6 +106,22 @@ reactorControl = {
     end
 }
 
+turbinePage = {
+    width = 13,
+    x = 8,
+    y = ymid,
+    height = 3,
+    monitor = mon,
+    text = "To Turbines",
+    state = false,
+    toggle = false,
+    colourOn = colours.green,
+    colourOff = colours.red,
+    onClick = function(s)
+        stop = false
+    end
+}
+
 quit = {
     x = term.getSize() - 12,
     text = "Quit",

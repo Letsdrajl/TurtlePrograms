@@ -51,7 +51,7 @@ function draw(button)
   else
     term.setBackgroundColor(button.colourOff)
   end
-
+  print("Draw1")
   term.setCursorPos(button.x, button.y)
 
   x1, y1, x2, y2 = getBounds(button)
@@ -64,10 +64,13 @@ function draw(button)
 
   local xmid = math.floor(((x2 + x1) - string.len(button.text)) / 2)
   local ymid = math.floor((y2 + y1) / 2)
+  print("Draw2")
   term.setCursorPos(xmid, ymid)
   term.write(button.text)
-  term.setBackgroundColor(colors.black)
+  print("Draw3")
+  term.setBackgroundColor(colours.black)
   term.redirect(term.native())
+  print("Draw4")
   term.setCursorPos(oldx, oldy)
 end
 

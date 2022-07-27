@@ -146,27 +146,21 @@ function main()
     Button.new(reboot)
     Button.drawAll()
 
-print("Adding EventListeners")
+    print("Adding EventListeners")
     EventListener.add("monitor_touch", "ButtonTouch", Button.eventHandler)
     EventListener.add("mouse_click", "ButtonClick", Button.eventHandler)
-    EventListener.add("redstone", "ButtonTouch", function()
-        reactor.setActive(redstone.getInput(redstoneSide))
-        reactorControl.state = reactor.getActive()
-        Button.drawAll()
-    end
-)
 
-EventListener.add("timer", "Automatic Shut Down", function()
-    if not reactor then
-        reactor = peripheral.wrap(reactorString)
-        end 
-    end
-)
+    EventListener.add("timer", "Automatic Shut Down", function()
+        if not reactor then
+            reactor = peripheral.wrap(reactorString)
+            end 
+        end
+    )
 
-EventListener.updateLoop(1, stop, function()
-    drawText()
-    end
-)
+    EventListener.updateLoop(1, stop, function()
+        drawText()
+        end
+    )
 end
 
 main()

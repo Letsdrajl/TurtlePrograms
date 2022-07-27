@@ -161,6 +161,7 @@ function main()
     Button.new(reactorControl)
     Button.new(quit)
     Button.new(reboot)
+    Button.new(turbinePage)
     Button.drawAll()
 
     print("Adding EventListeners")

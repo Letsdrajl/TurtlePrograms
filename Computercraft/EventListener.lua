@@ -61,6 +61,7 @@ end
 -- This will only call events on the redstone table if a redstone event is 
 -- captured.
 function runEvent(event)
+  term.setCursorPos(1, 1)
   print(event[1])
     for _, functionTable in pairs(events[event[1]]) do
       functionTable["func"](event)

@@ -1,6 +1,8 @@
 --Heavily inspired by Jack "Jiggins" Higgins
 --Updated to be more user friendly
 
+line = 1
+
 EventListener = {}
 -- events :: [Event -> IO ()]
 -- events :: A list of functions that take an event as the parameter and
@@ -61,7 +63,8 @@ end
 -- This will only call events on the redstone table if a redstone event is 
 -- captured.
 function runEvent(event)
-  term.setCursorPos(1, 1)
+  term.setCursorPos(line, 1)
+  line = line + 1
   print(event[1])
     for _, functionTable in pairs(events[event[1]]) do
       functionTable["func"](event)

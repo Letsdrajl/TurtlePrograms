@@ -113,7 +113,7 @@ turbinePage = {
     height = 3,
     monitor = mon,
     text = "To Turbines",
-    state = false,
+    state = true,
     toggle = false,
     colourOn = colours.green,
     colourOff = colours.red,
@@ -175,7 +175,8 @@ function main()
         end
     )
     
-    EventListener.updateLoop(1, stop, function()
+    stop = true
+    EventListener.updateLoop(1, function()
             drawText()
        end
     )

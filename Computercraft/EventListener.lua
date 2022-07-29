@@ -1,7 +1,7 @@
 --Heavily inspired by Jack "Jiggins" Higgins
 --Updated to be more user friendly
 
-line = 1
+stop = false
 
 EventListener = {}
 -- events :: [Event -> IO ()]
@@ -71,7 +71,7 @@ function runEvent(event)
     end
 end
 
-function updateLoop(updateFequency, stop, fun)
+function updateLoop(updateFequency, fun)
   while not stop do
     fun()
     os.startTimer(updateFequency)

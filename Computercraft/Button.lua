@@ -51,7 +51,7 @@ function draw(button)
   else
     term.setBackgroundColor(button.colourOff)
   end
-  --term.setCursorPos(button.x, button.y)
+  term.setCursorPos(button.x, button.y)
   
 
   x1, y1, x2, y2 = getBounds(button)

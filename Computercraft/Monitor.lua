@@ -1,4 +1,4 @@
-
+Monitor = {}
 
 --Returns an advanced monitor
 function getAdvMonitor()

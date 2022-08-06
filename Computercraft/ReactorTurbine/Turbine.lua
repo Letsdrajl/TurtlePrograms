@@ -20,7 +20,7 @@ if #turbines == 0 then
     print("No turbines connected")
 end
 
-local mon = getAdvMonitor()
+local mon = Monitor.getAdvMonitor()
 
 if not mon then
     print("No monitor connected")
@@ -105,7 +105,7 @@ local function drawText()
 end
 
 
-xmid, ymid = getCenter(mon)
+xmid, ymid = Monitor.getCenter(mon)
 
 nextTurbine = {
     width = 13,

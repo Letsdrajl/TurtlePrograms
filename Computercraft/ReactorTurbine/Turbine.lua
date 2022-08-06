@@ -1,16 +1,23 @@
 shell.run("Button")
 shell.run("EventListener")
+shell.run("Monitor")
 
 os.loadAPI("Button")
 os.loadAPI("EventListener")
+os.loadAPI("Monitor")
 
-local reactorString = "BigReactors-Reactor_0"
+local currentTurbine = 1
 
-local reactor = peripheral.wrap(reactorString)
+local turbines = {}
 
-if not reactor then
-    print("No Reactor connected")
-    shell.exit()
+local turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
+while turbine do
+    turbines[#turbines+1] = turbine
+    turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
+end
+
+if #turbines == 0 then
+    print("No turbines connected")
 end
 
 local mon = getAdvMonitor()
@@ -24,22 +31,31 @@ end
 local rightAlign, _ = mon.getSize()
 rightAlign = rightAlign - 22
 
+--Draws static text used for all Turbines
 local function drawStaticText()
     mon.setCursorPos(1,1)
-    mon.write("Reactor:")
+    mon.write("Turbine:")
     mon.setCursorPos(1,2)
     mon.write("Status:")
     mon.setCursorPos(1,3)
-    mon.write("Fuel:")
+    mon.write("Steam:")
     mon.setCursorPos(1,4)
-    mon.write("Fuel Temp:")
+    mon.write("RPM:")
 
     mon.setCursorPos(rightAlign,1)
     mon.write("Time:")
     mon.setCursorPos(rightAlign,2)
-    mon.write("Waste:")
+    mon.write("Coil:")
     mon.setCursorPos(rightAlign,3)
-    mon.write("Case Temp:")
+    mon.write("Energy/t:")
+end
+
+local function isEngaged(turbine)
+    if turbine.getInductorEngaged() then
+        return "Engaged"
+    else
+        return "Disengaged"
+    end
 end
 
 local function drawText()
@@ -50,13 +66,20 @@ local function drawText()
         mon.write("            ")
     end
 
+    local turbine = turbines[currentTurbine]
+
     mon.setCursorPos(12, 1)
 
-    mon.setTextColour(colours.green)
-    mon.write("Connected")
+    if turbine.mbIsConnected() then
+        mon.setTextColour(colours.green)
+        mon.write("Connected")
+    else
+        mon.setTextColour(colours.red)
+        mon.write("Disconnected")
+    end
     mon.setCursorPos(12, 2)
-    
-    if reactor.getActive() then
+
+    if turbine.getActive() then
         mon.setTextColour(colours.green)
         mon.write("Online")
     else
@@ -66,56 +89,78 @@ local function drawText()
 
     mon.setTextColour(colours.white)
     mon.setCursorPos(12, 3)
-    mon.write(reactor.getFuelAmount() / 1000 .. "B")
+    mon.write(turbine.getInputAmount() / 1000 .. "B")
     mon.setCursorPos(12, 4)
-    mon.write(math.floor(reactor.getFuelTemperature()) .. " C")
+    mon.write(turbine.getRotorSpeed() .. " RPM")
 
     mon.setCursorPos(rightAlign + 12, 1)
     mon.write(os.time())
     mon.setCursorPos(rightAlign + 12, 2)
-    mon.write(reactor.getWasteAmount() / 1000 .. "B")
+    mon.write(isEngaged(turbine))
     mon.setCursorPos(rightAlign + 12, 3)
-    mon.write(math.floor(reactor.getCasingTemperature()) .. " C")
+    mon.write(turbine.getEnergyProducedLastTick() .. " FE/t")
 
     mon.setCursorPos(24, 4)
     mon.setTextColour(colours.white)
-      
 end
+
 
 xmid, ymid = getCenter(mon)
 
--- Buttons
-
-reactorControl = {
+nextTurbine = {
     width = 13,
     x = 4,
     y = ymid,
     height = 3,
     monitor = mon,
-    text = "Reactor",
-    state = false,
-    toggle = true,
+    text = ">",
+    state = true,
+    toggle = false,
     colourOn = colours.green,
     colourOff = colours.red,
     onClick = function(s)
-        reactor.setActive(s)
+        if currentTurbine < #turbines then
+            currentTurbine = currentTurbine + 1
+        else
+            currentTurbine = 1
+        end
     end
 }
 
-turbinePage = {
+previousTurbine = {
+    width = 13,
+    x = 4,
+    y = ymid,
+    height = 3,
+    monitor = mon,
+    text = ">",
+    state = true,
+    toggle = false,
+    colourOn = colours.green,
+    colourOff = colours.red,
+    onClick = function(s)
+        if currentTurbine > 1 then
+            currentTurbine = currentTurbine - 1
+        else
+            currentTurbine = #turbines
+        end
+    end
+}
+
+reactorPage = {
     width = 13,
     x = 19,
     y = ymid,
     height = 3,
     monitor = mon,
-    text = "To Turbines",
+    text = "To Reactors",
     state = true,
     toggle = false,
     colourOn = colours.green,
     colourOff = colours.red,
     onClick = function(s)
         stop = true
-        shell.run("Turbine")
+        shell.run("ReactorControl")
     end
 }
 
@@ -148,17 +193,18 @@ reboot = {
 }
 
 function main()
+
     mon.clear()
     term.clear()
-    reactor.setActive(false)
-    print("Drawing Static Text")
+
+    print("Drawing static text")
     drawStaticText()
 
     print("Adding Buttons")
-    Button.new(reactorControl)
-    Button.new(quit)
+    Button.new(nextTurbine)
+    Button.new(previousTurbine)
     Button.new(reboot)
-    Button.new(turbinePage)
+    Button.new(quit)
     Button.drawAll()
 
     print("Adding EventListeners")
@@ -166,12 +212,13 @@ function main()
     EventListener.add("mouse_click", "ButtonClick", Button.eventHandler)
 
     EventListener.add("timer", "Automatic Shut Down", function()
-        if not reactor then
-            reactor = peripheral.wrap(reactorString)
+        if not TURBINE then
+            TURBINE = peripheral.wrap("BigReactors-Turbine_" .. currentTurbine)
             end 
         end
     )
-    
+
+
     while not stop do
         drawText()
         os.startTimer(1)

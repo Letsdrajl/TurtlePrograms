@@ -71,7 +71,7 @@ function runEvent(event)
     end
 end
 
-function updateLoop(updateFequency, fun)
+function updateLoop(updateFequency, stop, fun)
   while not stop do
     fun()
     os.startTimer(updateFequency)

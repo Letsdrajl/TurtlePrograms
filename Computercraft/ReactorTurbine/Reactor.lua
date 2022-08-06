@@ -177,7 +177,7 @@ function main()
     while not stop do
         drawText()
         os.startTimer(1)
-        runEvent({os.pullEvent()})
+        EventListener.runEvent({os.pullEvent()})
     end
     print("Loop ended")
 end

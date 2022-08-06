@@ -1,8 +1,10 @@
 shell.run("Button")
 shell.run("EventListener")
+shell.run("Monitor")
 
 os.loadAPI("Button")
 os.loadAPI("EventListener")
+os.loadAPI("Monitor")
 
 local reactorString = "BigReactors-Reactor_0"
 

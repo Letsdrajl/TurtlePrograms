@@ -8,7 +8,7 @@ urls = {
     {"ReactorControl",  "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/ReactorTurbine/Reactor.lua"},
     {"Turbine",         "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/ReactorTurbine/Turbine.lua"},
     {"Monitor",         "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/Monitor.lua"},
-    {"EnergyManager",   "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/EnergyManager.lua"}
+    {"EnergyManager",   "https://raw.githubusercontent.com/Letsdrajl/TurtlePrograms/main/Computercraft/ReactorTurbine/EnergyManager.lua"}
 }
 
 

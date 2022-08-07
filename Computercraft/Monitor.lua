@@ -25,7 +25,7 @@ function getCenter(mon)
     return xmid, ymid
 end
 
-function drawGraph(mon, x1, y1, x2, y2, fillValue)
+function drawGraph(mon, x1, x2, y1, y2, fillValue)
     local oldx, oldy = term.getCursorPos()
     term.redirect(mon)
 

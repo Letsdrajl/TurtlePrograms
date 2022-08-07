@@ -1,10 +1,12 @@
 shell.run("Button")
 shell.run("EventListener")
 shell.run("Monitor")
+shell.run("EnergyManager")
 
 os.loadAPI("Button")
 os.loadAPI("EventListener")
 os.loadAPI("Monitor")
+os.loadAPI("EnergyManager")
 
 local reactorString = "BigReactors-Reactor_0"
 
@@ -185,9 +187,13 @@ function main()
             end 
         end
     )
+
+    EnergyManager.addReactor(reactor)
     
     while not stop do
         drawText()
+        EnergyManager.manageReactor()
+        EnergyManager.manageTurbines()
         os.startTimer(1)
         EventListener.runEvent({os.pullEvent()})
     end

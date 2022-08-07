@@ -1,10 +1,12 @@
 shell.run("Button")
 shell.run("EventListener")
 shell.run("Monitor")
+shell.run("EnergyManager")
 
 os.loadAPI("Button")
 os.loadAPI("EventListener")
 os.loadAPI("Monitor")
+os.loadAPI("EnergyManager")
 
 local currentTurbine = 1
 
@@ -16,6 +18,7 @@ local turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
 while turbine do
     turbines[#turbines+1] = turbine
     turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
+    turbine.setVentAll()
 end
 
 if #turbines == 0 then
@@ -243,10 +246,13 @@ function main()
             end 
         end
     )
+    EnergyManager.addReactor(turbines)
 
 
     while not stop do
         drawText()
+        EnergyManager.manageReactor()
+        EnergyManager.manageTurbines()
         Monitor.drawGraph(mon, 1, 10, ymid + 5, ymid + 8, rpmPercent())
         os.startTimer(1)
         EventListener.runEvent({os.pullEvent()})

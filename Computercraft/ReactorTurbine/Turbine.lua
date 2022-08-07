@@ -7,12 +7,11 @@ os.loadAPI("Button")
 os.loadAPI("EventListener")
 os.loadAPI("Monitor")
 os.loadAPI("EnergyManager")
+os.loadAPI("ReactorControl")
 
 local currentTurbine = 1
 
 local stop = false
-
-
 
 if #turbines == 0 then
     print("No turbines connected")

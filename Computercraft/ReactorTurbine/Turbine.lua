@@ -122,6 +122,10 @@ local function rpmPercent()
     end
 end
 
+local function setStop(value)
+    stop = value    
+end
+
 xmid, ymid = Monitor.getCenter(mon)
 
 nextTurbine = {
@@ -176,7 +180,7 @@ reactorPage = {
     colourOn = colours.green,
     colourOff = colours.red,
     onClick = function(s)
-        stop = true
+        setStop(true)
         shell.run("ReactorControl")
     end
 }
@@ -187,7 +191,7 @@ quit = {
     colourOn = colors.red,
     colourOff = colors.green,
     onClick = function()
-        stop = true
+        setStop(true)
         mon.clear()
         term.clear()
     end
@@ -200,8 +204,7 @@ reboot = {
     colourOn = colors.red,
     colourOff = colors.green,
     onClick = function()
-        reactor.setActive(false)
-        stop = true
+        setStop(true)
         mon.clear()
         term.clear()
         shell.run("reboot")

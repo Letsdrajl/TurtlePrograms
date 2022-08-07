@@ -86,6 +86,10 @@ local function drawText()
       
 end
 
+local function setStop(value)
+    stop = value    
+end
+
 xmid, ymid = Monitor.getCenter(mon)
 
 -- Buttons
@@ -118,7 +122,7 @@ turbinePage = {
     colourOn = colours.green,
     colourOff = colours.red,
     onClick = function(s)
-        stop = true
+        setStop(true)
         shell.run("Turbine")
     end
 }
@@ -130,7 +134,7 @@ quit = {
     colourOff = colors.green,
     onClick = function()
         reactor.setActive(false)
-        stop = true
+        setStop(true)
         mon.clear()
         term.clear()
     end
@@ -144,7 +148,7 @@ reboot = {
     colourOff = colors.green,
     onClick = function()
         reactor.setActive(false)
-        stop = true
+        setStop(true)
         mon.clear()
         term.clear()
         shell.run("reboot")

@@ -10,6 +10,8 @@ local currentTurbine = 1
 
 local turbines = {}
 
+local stop = false
+
 local turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
 while turbine do
     turbines[#turbines+1] = turbine

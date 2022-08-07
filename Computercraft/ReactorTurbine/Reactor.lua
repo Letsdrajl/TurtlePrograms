@@ -26,6 +26,8 @@ end
 local rightAlign, _ = mon.getSize()
 rightAlign = rightAlign - 22
 
+local stop = false
+
 local function drawStaticText()
     mon.setCursorPos(1,1)
     mon.write("Reactor:")

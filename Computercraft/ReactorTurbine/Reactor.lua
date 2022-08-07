@@ -28,6 +28,10 @@ rightAlign = rightAlign - 22
 
 local stop = false
 
+--Variables to start a new prog after loop ended
+local startNew = false
+local prog = ""
+
 local function drawStaticText()
     mon.setCursorPos(1,1)
     mon.write("Reactor:")
@@ -123,7 +127,8 @@ turbinePage = {
     colourOff = colours.red,
     onClick = function(s)
         setStop(true)
-        shell.run("Turbine")
+        startNew = true
+        prog = "Turbine"
     end
 }
 
@@ -151,7 +156,8 @@ reboot = {
         setStop(true)
         mon.clear()
         term.clear()
-        shell.run("reboot")
+        startNew = true
+        prog = "reboot"
     end
 }
 
@@ -186,6 +192,9 @@ function main()
         EventListener.runEvent({os.pullEvent()})
     end
     print("Loop ended")
+    if startNew then
+        shell.run(prog)
+    end
 end
 
 main()

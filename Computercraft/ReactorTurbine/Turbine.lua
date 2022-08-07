@@ -36,6 +36,10 @@ rightAlign = rightAlign - 22
 --Max RPM for turbines
 local maxRPM = 2000
 
+--Variables to start a new prog after loop ended
+local startNew = false
+local prog = ""
+
 --Draws static text used for all Turbines
 local function drawStaticText()
     mon.setCursorPos(1,1)
@@ -181,7 +185,8 @@ reactorPage = {
     colourOff = colours.red,
     onClick = function(s)
         setStop(true)
-        shell.run("ReactorControl")
+        startNew = true
+        prog = "ReactorControl"
     end
 }
 
@@ -207,7 +212,8 @@ reboot = {
         setStop(true)
         mon.clear()
         term.clear()
-        shell.run("reboot")
+        startNew = true
+        prog = "reboot"
     end
 }
 
@@ -246,6 +252,9 @@ function main()
         EventListener.runEvent({os.pullEvent()})
     end
     print("Loop ended")
+    if startNew then
+        shell.run(prog)
+    end
 end
 
 main()

@@ -24,3 +24,32 @@ function getCenter(mon)
 
     return xmid, ymid
 end
+
+function drawGraph(mon, x1, y1, x2, y2, fillValue)
+    local oldx, oldy = term.getCursorPos()
+    term.redirect(mon)
+
+    term.setBackgroundColor(colours.grey)
+
+    for j = y1, y2 do
+        for i = x1, x2 do
+            term.setCursorPos(i, j)
+            term.write(" ")
+        end
+    end
+
+    term.setBackgroundColor(colours.green)
+
+    local fillX = math.floor((x2 - x1) * fillValue)
+
+    for j = y1, y2 do
+        for i = x1, fillX do
+            term.setCursorPos(i, j)
+            term.write(" ")
+        end
+    end
+
+    term.setBackgroundColor(colours.black)
+    term.redirect(term.native())
+    term.setCursorPos(oldx, oldy)
+end

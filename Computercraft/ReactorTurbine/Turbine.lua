@@ -31,6 +31,9 @@ end
 local rightAlign, _ = mon.getSize()
 rightAlign = rightAlign - 22
 
+--Max RPM for turbines
+local maxRPM = 2000
+
 --Draws static text used for all Turbines
 local function drawStaticText()
     mon.setCursorPos(1,1)
@@ -50,6 +53,7 @@ local function drawStaticText()
     mon.write("Energy/t:")
 end
 
+--Returns a string if the Inductor is engaged
 local function isEngaged(turbine)
     if turbine.getInductorEngaged() then
         return "Engaged"
@@ -58,6 +62,7 @@ local function isEngaged(turbine)
     end
 end
 
+--Draws text based on current turbine values
 local function drawText()
     for i = 1, 4 do
         mon.setCursorPos(12, i)
@@ -73,6 +78,18 @@ local function drawText()
     if turbine.mbIsConnected() then
         mon.setTextColour(colours.green)
         mon.write("Connected")
+        mon.setTextColour(colours.white)
+        mon.setCursorPos(12, 3)
+        mon.write(turbine.getInputAmount() / 1000 .. "B")
+        mon.setCursorPos(12, 4)
+        mon.write(math.floor(turbine.getRotorSpeed()) .. " RPM")
+
+        mon.setCursorPos(rightAlign + 12, 1)
+        mon.write(os.time())
+        mon.setCursorPos(rightAlign + 12, 2)
+        mon.write(isEngaged(turbine))
+        mon.setCursorPos(rightAlign + 12, 3)
+        mon.write(math.floor(turbine.getEnergyProducedLastTick()) .. " FE/t")
     else
         mon.setTextColour(colours.red)
         mon.write("Disconnected")
@@ -87,30 +104,28 @@ local function drawText()
         mon.write("Offline")
     end
 
-    mon.setTextColour(colours.white)
-    mon.setCursorPos(12, 3)
-    mon.write(turbine.getInputAmount() / 1000 .. "B")
-    mon.setCursorPos(12, 4)
-    mon.write(turbine.getRotorSpeed() .. " RPM")
-
-    mon.setCursorPos(rightAlign + 12, 1)
-    mon.write(os.time())
-    mon.setCursorPos(rightAlign + 12, 2)
-    mon.write(isEngaged(turbine))
-    mon.setCursorPos(rightAlign + 12, 3)
-    mon.write(turbine.getEnergyProducedLastTick() .. " FE/t")
-
     mon.setCursorPos(24, 4)
     mon.setTextColour(colours.white)
 end
 
+--Returns percentage of rpm based on maxRPM
+local function rpmPercent()
+    local rpm = turbines[currentTurbine].getRotorSpeed()
+
+    local percent = rpm / maxRPM
+    if percent >= 1 then
+        return 1
+    else
+        return percent
+    end
+end
 
 xmid, ymid = Monitor.getCenter(mon)
 
 nextTurbine = {
-    width = 13,
+    width = 3,
     x = 4,
-    y = ymid,
+    y = ymid - 3,
     height = 3,
     monitor = mon,
     text = ">",
@@ -128,9 +143,9 @@ nextTurbine = {
 }
 
 previousTurbine = {
-    width = 13,
-    x = 4,
-    y = ymid,
+    width = 3,
+    x = 1,
+    y = ymid - 3,
     height = 3,
     monitor = mon,
     text = ">",
@@ -170,7 +185,6 @@ quit = {
     colourOn = colors.red,
     colourOff = colors.green,
     onClick = function()
-        reactor.setActive(false)
         stop = true
         mon.clear()
         term.clear()
@@ -203,6 +217,7 @@ function main()
     print("Adding Buttons")
     Button.new(nextTurbine)
     Button.new(previousTurbine)
+    Button.new(reactorPage)
     Button.new(reboot)
     Button.new(quit)
     Button.drawAll()
@@ -221,6 +236,7 @@ function main()
 
     while not stop do
         drawText()
+        drawGraph(mon, 1, 10, ymid + 5, ymid + 8, rpmPercent())
         os.startTimer(1)
         EventListener.runEvent({os.pullEvent()})
     end

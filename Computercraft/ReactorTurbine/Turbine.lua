@@ -10,16 +10,9 @@ os.loadAPI("EnergyManager")
 
 local currentTurbine = 1
 
-local turbines = {}
-
 local stop = false
 
-local turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
-while turbine do
-    turbines[#turbines+1] = turbine
-    turbine.setVentAll()
-    turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
-end
+
 
 if #turbines == 0 then
     print("No turbines connected")
@@ -246,7 +239,6 @@ function main()
             end 
         end
     )
-    EnergyManager.addReactor(turbines)
 
 
     while not stop do

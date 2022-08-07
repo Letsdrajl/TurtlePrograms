@@ -17,6 +17,19 @@ if not reactor then
     shell.exit()
 end
 
+
+
+turbines = {}
+
+local turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
+while turbine do
+    turbines[#turbines+1] = turbine
+    turbine.setVentAll()
+    turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
+end
+
+
+
 local mon = Monitor.getAdvMonitor()
 
 if not mon then
@@ -188,6 +201,7 @@ function main()
         end
     )
 
+    EnergyManager.addTurbines(turbines)
     EnergyManager.addReactor(reactor)
     
     while not stop do

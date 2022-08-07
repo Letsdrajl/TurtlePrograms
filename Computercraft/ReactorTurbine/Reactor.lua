@@ -19,7 +19,7 @@ end
 
 
 
-turbines = {}
+local turbines = {}
 
 local turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
 while turbine do

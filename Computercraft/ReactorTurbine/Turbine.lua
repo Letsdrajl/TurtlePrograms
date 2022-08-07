@@ -7,11 +7,30 @@ os.loadAPI("Button")
 os.loadAPI("EventListener")
 os.loadAPI("Monitor")
 os.loadAPI("EnergyManager")
-os.loadAPI("ReactorControl")
 
 local currentTurbine = 1
 
 local stop = false
+
+
+local reactorString = "BigReactors-Reactor_0"
+
+local reactor = peripheral.wrap(reactorString)
+
+if not reactor then
+    print("No Reactor connected")
+    shell.exit()
+end
+
+
+local turbines = {}
+
+local turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
+while turbine do
+    turbines[#turbines+1] = turbine
+    turbine.setVentAll()
+    turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
+end
 
 if #turbines == 0 then
     print("No turbines connected")

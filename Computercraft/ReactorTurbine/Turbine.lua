@@ -148,7 +148,7 @@ previousTurbine = {
     y = ymid - 3,
     height = 3,
     monitor = mon,
-    text = ">",
+    text = "<",
     state = true,
     toggle = false,
     colourOn = colours.green,
@@ -236,7 +236,7 @@ function main()
 
     while not stop do
         drawText()
-        drawGraph(mon, 1, 10, ymid + 5, ymid + 8, rpmPercent())
+        Monitor.drawGraph(mon, 1, 10, ymid + 5, ymid + 8, rpmPercent())
         os.startTimer(1)
         EventListener.runEvent({os.pullEvent()})
     end

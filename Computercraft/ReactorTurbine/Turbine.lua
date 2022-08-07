@@ -17,8 +17,8 @@ local stop = false
 local turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
 while turbine do
     turbines[#turbines+1] = turbine
-    turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
     turbine.setVentAll()
+    turbine = peripheral.wrap("BigReactors-Turbine_" .. #turbines)
 end
 
 if #turbines == 0 then

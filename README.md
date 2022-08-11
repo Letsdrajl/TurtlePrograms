@@ -3,6 +3,8 @@ Here is the collection of my turtle programms/computer programs for computercraf
 Each programm name has a pastebin code and a small description.
 <hr>
 Computercraft:<br>
+&nbsp;&nbsp;ReactorControler:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Pastebin: dFFkpKMj<br>
 &nbsp;&nbsp;Turtles:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Room:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pastebin: PiUpx4mX<br>
